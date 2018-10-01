@@ -1,8 +1,11 @@
 package gui;
+import model.ToDoItem;
 import model.ToDoList;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MainFrame extends JFrame {
     private JTable table;
@@ -43,7 +46,14 @@ public class MainFrame extends JFrame {
         JLabel lblAddtoDo = new JLabel("Zadejte todo : ");
         JTextField txtAddToDo = new JTextField();
         JButton btnAdd = new JButton("Přidat");
-
+        btnAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                toDoList.addItem(new ToDoItem(txtAddToDo.getText()));
+                txtAddToDo.setText("");
+                model.setList(toDoList);
+            }
+        });
         formPanel.add(lblAddtoDo,BorderLayout.WEST);
         formPanel.add(txtAddToDo,BorderLayout.CENTER);
         formPanel.add(btnAdd,BorderLayout.EAST);
