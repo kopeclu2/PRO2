@@ -85,6 +85,6 @@ public class TodoTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        
+        return true;
     }
 }

@@ -1,8 +1,13 @@
 package gui;
+import model.ToDoList;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
+    private JTable table;
+    private ToDoList toDoList;
+    private TodoTableModel model;
 
     public MainFrame(){
         init();
@@ -13,7 +18,21 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(640,480);
         setLocationRelativeTo(null);
+
+        toDoList = new ToDoList();
+        model = new TodoTableModel();
+        model.setList(toDoList);
+
         intiControlPanel();
+        initConentPanel();
+    }
+
+    private void initConentPanel() {
+        JPanel contentPanel = new JPanel(new BorderLayout());
+        table = new JTable();
+        table.setModel(model);
+        contentPanel.add(new JScrollPane(table));
+        add(contentPanel,BorderLayout.CENTER);
     }
 
     private void intiControlPanel(){
